@@ -2,7 +2,8 @@ import logo from "./logo.svg"
 import { Tensor, InferenceSession } from "onnxjs"
 import "./App.css"
 import {softmax} from "./utils.js"
-
+// https://github.com/microsoft/onnxjs-demo/tree/master/src
+// https://github.com/onnx/models/tree/master/vision/body_analysis/emotion_ferplus
 import React, { Component } from "react"
 
 export default class App extends Component {
