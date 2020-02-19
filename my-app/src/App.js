@@ -13,7 +13,7 @@ const videoConstraints = {
 export default class App extends Component {
   constructor(props) {
     super(props)
-    this.webcamRef = React.useRef(null);
+    this.webcamRef = React.createRef();
   }
 
   onUserMedia = (media) => {
