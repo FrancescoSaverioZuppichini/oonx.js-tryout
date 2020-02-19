@@ -9,7 +9,7 @@ import React, { Component } from 'react'
 export default class Model extends Component {
 	constructor(props) {
 		super(props)
-		this.state = { output: 0 }
+		this.state = { output: 0, inferenceTime: 0 }
 		this.emotionMap = [ 'neutral', 'happiness', 'surprise', 'sadness', 'anger', 'disgust', 'fear', 'contempt' ]
 
 		this.canvas = React.createRef()
@@ -29,8 +29,17 @@ export default class Model extends Component {
 
 	runModel = () => {
 		window.setInterval(() => {
-			this.getInputFromWebCam().then((x) => this.inference(x)).then((output) => this.setState({ output }))
-		}, 6000 / 15)
+			const start = new Date()
+            this.getInputFromWebCam()
+            .then((x) => this.inference(x))
+            .then((output) => {
+                console.log(output)
+				const end = new Date()
+				const inferenceTime = end.getTime() - start.getTime()
+				this.setState({ output, inferenceTime })
+            })
+            .catch(e => console.log(e))
+		}, 6000 / 10)
 	}
 
 	inference = async (x) => {
@@ -50,7 +59,6 @@ export default class Model extends Component {
 		// preprocessing
 		const data = this.scale(context, 64, 64)
 		const x = imgToGray(data, 64, 64)
-
 		return x
 	}
 
@@ -85,7 +93,7 @@ export default class Model extends Component {
 			<div>
 				<canvas ref={this.canvas} style={{ display: 'none' }} />
 				<canvas ref={this.tempCanvas} width="400" height="400" style={{ display: 'none' }} />
-				{this.props.children(this.state.output)}
+				{this.props.children(this.state)}
 			</div>
 		)
 	}

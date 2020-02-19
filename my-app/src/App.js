@@ -44,11 +44,10 @@ export default class App extends Component {
 		return (
 			<div>
 				<img id="putin" src="putin.jpg" />
-				<video id="video" width="640" height="480" autoplay />
+				<video id="video" width="416" height="416" autoplay />
 				<button onClick={this.capture}>Capture photo</button>
-				<canvas id="canvas2" width="400" height="400" />
 
-				<Model input={document.getElementById('putin')}>{(output) => <p>{output}</p>}</Model>
+				<Model input={document.getElementById('putin')}>{({ output, inferenceTime }) => <p>{output} {`${inferenceTime}ms`}</p>}</Model>
 			</div>
 		)
 	}
