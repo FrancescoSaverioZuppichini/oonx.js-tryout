@@ -27,7 +27,7 @@ export default class App extends Component {
         <Webcam
           audio={false}
           height={720}
-          ref={webcamRef}
+          ref={this.webcamRef}
           onUserMedia={this.onUserMedia}
           screenshotFormat="image/jpeg"
           width={1280}
