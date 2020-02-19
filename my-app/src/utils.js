@@ -18,7 +18,7 @@ export function loadImage(src) {
 }
 
 
-export function imgToGray(data, width, height ) {
+export function imgToGray(data, width, height) {
   const greyScale = []
   for (let i = 0; i < data.length; i += 4) {
     greyScale.push(
@@ -38,4 +38,17 @@ export function imgToGray(data, width, height ) {
   tensor.data.set(greyScale)
 
   return tensor
+}
+
+export function argmax(arr) {
+  let maxInd = -1
+  let maxProb = -1
+  for (let i = 0; i < arr.length; i++) {
+    if (maxProb < arr[i]) {
+      maxProb = arr[i]
+      maxInd = i
+    }
+  }
+
+  return maxInd
 }
